@@ -23,10 +23,7 @@ def import_data(filename='booking.txt'):
         return file_content
     
 
-# def main():
-#     filename = 'booking.txt'
-#     print(import_data(filename))
-print(import_data())
+# print(import_data())
 
 def export_data(bookings, filename='booking.txt', mode='a'):
     """
@@ -41,7 +38,11 @@ def export_data(bookings, filename='booking.txt', mode='a'):
     :raises ValueError: if mode other than 'w' or 'a' was given. Error message:
         'Wrong write mode'
     """
-    pass
+    with open(filename, 'w') as write_to_file:
+
+        for book in bookings:
+            write_to_file.write(book)
+
 
 
 def get_rows_by_booking_status(rows, status):
@@ -55,7 +56,15 @@ def get_rows_by_booking_status(rows, status):
     :returns: all rows of given status
     :rtype: list
     """
-    pass
+    for row in rows:
+        if row[8].upper() == status.upper():
+            print(row)
+
+    
+def main():
+    rows = import_data()
+    get_rows_by_booking_status(rows, 'Canceled')
+    
 
 
 def get_rows_by_date(rows, date_in, date_out):
@@ -93,5 +102,5 @@ def display_reservation(rows, date):
     pass
 
 
-# if __name__ == '__main__':
-#     main()
+if __name__ == '__main__':
+    main()
