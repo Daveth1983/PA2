@@ -75,6 +75,17 @@ def get_rows_by_date(rows, date_in, date_out):
     :returns: list of booking in date range betwee date_in and date_out
     :rtype: list
     """
+    date_in = todatatype(date_in)
+    print(date_in)
+    date_out = todatatype(date_out)
+    print(date_in)
+    for row in rows:
+        checkin = todatatype(row[1])
+        # print(checkin)
+        checkout = todatatype(row[9])
+        # print(checkout)
+        if checkin == date_in and checkout == date_out:
+            print(row)
 
 
 def main():
@@ -82,7 +93,8 @@ def main():
     # get_rows_by_booking_status(rows, 'Canceled')
     # children_number_in_date()
     # print(todatatype('25/09/2022'))
-    print(children_number_in_date(rows , '09/10/2022', 'City Hotel'))
+    # print(children_number_in_date(rows , '09/20/2022', 'Resort Hotel'))
+    print(get_rows_by_date(rows,'09/10/2022','09/08/2022'))
 
 def children_number_in_date(rows, date, hotel):
     """
