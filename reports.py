@@ -43,7 +43,7 @@ def export_data(bookings, filename='booking.txt', mode='a'):
     """
 
 
-    if mode != 'a':
+    if mode != 'a' or mode != 'w':
         raise ValueError("Wrong type of mode")
     else:
 
