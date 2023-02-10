@@ -94,7 +94,8 @@ def main():
     # children_number_in_date()
     # print(todatatype('25/09/2022'))
     # print(children_number_in_date(rows , '09/20/2022', 'Resort Hotel'))
-    print(get_rows_by_date(rows,'09/10/2022','09/08/2022'))
+    # print(get_rows_by_date(rows,'09/10/2022','09/08/2022'))
+    # print(display_reservation(rows, '09/10/2022'))
 
 def children_number_in_date(rows, date, hotel):
     """
@@ -131,8 +132,12 @@ def display_reservation(rows, date):
     Please get check out date based on arrival_date and booked nights
     """
     print('hotel | check in | check out | adults | children | babies | status')
+    reservation_date = todatatype(date)
+
     for row in rows:
-        print(row)
+        data_rezerwacji = todatatype(row[1])
+        if data_rezerwacji == reservation_date:
+            return row
 
 
 
