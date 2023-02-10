@@ -41,10 +41,16 @@ def export_data(bookings, filename='booking.txt', mode='a'):
     :raises ValueError: if mode other than 'w' or 'a' was given. Error message:
         'Wrong write mode'
     """
-    with open(filename, mode) as write_to_file:
 
-        for book in bookings:
-            write_to_file.write(book)
+
+    if mode != 'a':
+        raise ValueError("Wrong type of mode")
+    else:
+
+        with open(filename, mode) as write_to_file:
+
+            for book in bookings:
+                write_to_file.write(book)
 
 
 
@@ -53,15 +59,25 @@ def get_rows_by_booking_status(rows, status):
     Get booking rows by status
 
     :param list: booking data
-    :param str status: status to filter by e.g. Canceled, Checked-out
+    :param str status: status to filter by e.g. Canceled, Check-out
 
     :raises ValueError: if given status is not present in the list. Error message: 'Status is not present in list'
     :returns: all rows of given status
     :rtype: list
     """
+    
+    correct_status = []
+
     for row in rows:
-        if row[8].upper() == status.upper():
-            print(row)
+        correct_status.append(row[8])
+        
+    if status  in correct_status:
+        for row in rows:
+            if row[8].upper() == status.upper():
+                return row
+    else: 
+        raise ValueError
+  
 
     
     
@@ -96,6 +112,7 @@ def main():
     # print(children_number_in_date(rows , '09/20/2022', 'Resort Hotel'))
     # print(get_rows_by_date(rows,'09/10/2022','09/08/2022'))
     # print(display_reservation(rows, '09/10/2022'))
+    get_rows_by_booking_status(rows, "Check-Out")
 
 def children_number_in_date(rows, date, hotel):
     """
