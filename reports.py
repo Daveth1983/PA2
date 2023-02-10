@@ -76,16 +76,16 @@ def get_rows_by_date(rows, date_in, date_out):
     :rtype: list
     """
     date_in = todatatype(date_in)
-    print(date_in)
+    # print(date_in)
     date_out = todatatype(date_out)
-    print(date_in)
+    # print(date_in)
     for row in rows:
         checkin = todatatype(row[1])
         # print(checkin)
         checkout = todatatype(row[9])
         # print(checkout)
         if checkin == date_in and checkout == date_out:
-            print(row)
+            return row
 
 
 def main():
