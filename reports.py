@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 def import_data(filename='booking.txt'):
     """
     Import data from a file to a list. The columns are marked as follows:
@@ -38,7 +41,7 @@ def export_data(bookings, filename='booking.txt', mode='a'):
     :raises ValueError: if mode other than 'w' or 'a' was given. Error message:
         'Wrong write mode'
     """
-    with open(filename, 'w') as write_to_file:
+    with open(filename, mode) as write_to_file:
 
         for book in bookings:
             write_to_file.write(book)
@@ -61,9 +64,6 @@ def get_rows_by_booking_status(rows, status):
             print(row)
 
     
-def main():
-    rows = import_data()
-    get_rows_by_booking_status(rows, 'Canceled')
     
 
 
@@ -75,8 +75,14 @@ def get_rows_by_date(rows, date_in, date_out):
     :returns: list of booking in date range betwee date_in and date_out
     :rtype: list
     """
-    pass
 
+
+def main():
+    rows = import_data()
+    # get_rows_by_booking_status(rows, 'Canceled')
+    # children_number_in_date()
+    # print(todatatype('25/09/2022'))
+    print(children_number_in_date(rows , '09/10/2022', 'City Hotel'))
 
 def children_number_in_date(rows, date, hotel):
     """
@@ -86,8 +92,21 @@ def children_number_in_date(rows, date, hotel):
     :returns: number of chidren
     :rtype: int
     """
-    pass
+    data2 = todatatype(date)
+    for row in rows:
+        if todatatype(row[1]) == data2 and hotel == row[0]:
 
+            return int(row[3])
+
+
+
+def todatatype(data_imput):
+    format = '%m/%d/%Y'
+    return datetime.strptime(data_imput, format)
+   
+    
+    
+    
 
 def display_reservation(rows, date):
     """
@@ -99,7 +118,12 @@ def display_reservation(rows, date):
 
     Please get check out date based on arrival_date and booked nights
     """
-    pass
+    print('hotel | check in | check out | adults | children | babies | status')
+    for row in rows:
+        print(row)
+
+
+
 
 
 if __name__ == '__main__':
